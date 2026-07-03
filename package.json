@@ -1,0 +1,11 @@
+{
+  "name": "out-of-the-box-pakketpunten-viewer",
+  "private": true,
+  "description": "Statische serve-setup voor Railway; de app zelf is plain HTML/JS zonder build-stap.",
+  "scripts": {
+    "start": "serve -l $PORT ."
+  },
+  "dependencies": {
+    "serve": "^14.2.4"
+  }
+}

@@ -192,16 +192,16 @@ met een bewezen transformatie (bijv. GDAL/ogr2ogr of pyproj).
 
 ## Toekomstige uitbreidingen (volgende fase)
 
+-   **Locatievisualisatie:** de gebruiker klikt een locatie op de kaart
+    aan en er wordt een 2D-afbeelding gegenereerd van het concept op
+    die specifieke locatie (bijv. op basis van straatbeeld, zie
+    Mapillary-integratie)
 -   **Eigen concepten via LLM:** de gebruiker verzint met een
     LLM-koppeling een nieuw concept; het LLM genereert daarbij ook een
     bijpassende datalaag op de kaart (welk locatietype past bij dit
     concept en welke bron levert die locaties). Hoeft alleen lokaal
     (bij de beheerder) te werken, niet in de gehoste webapp; het
     resultaat wordt als nieuwe snapshot-laag meegeleverd
--   **Locatievisualisatie:** de gebruiker klikt een locatie op de kaart
-    aan en er wordt een 2D-afbeelding gegenereerd van het concept op
-    die specifieke locatie (bijv. op basis van straatbeeld, zie
-    Mapillary-integratie)
 -   Mapillary-integratie
 -   AI-locatieadvies
 -   Datafiltering per bron: kansrijkheidscriteria per dataset (bijv.

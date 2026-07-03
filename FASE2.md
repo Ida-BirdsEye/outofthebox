@@ -3,11 +3,60 @@
 Uitwerking van de twee volgende-fase-functies uit de PRD. Elke functie
 heeft een eigen prompt die later aan Claude Code gevoerd kan worden.
 Voorwaarde: fase 1 t/m 4 uit `BOUWPLAN.md` zijn af en de app draait op
-Railway.
+Railway. Functie 1 wordt als eerste uitgewerkt.
 
 ---
 
-## Functie 1 — Eigen concepten via LLM (lokaal)
+## Functie 1 — Locatievisualisatie (in de gehoste webapp)
+
+**Doel:** een stakeholder klikt een locatie op de kaart aan en ziet een
+gegenereerde 2D-afbeelding van het concept op die specifieke locatie.
+Dit is het overtuigingsmoment: het concept in de eigen straat.
+
+**Draait:** in de gehoste webapp op Railway. Vereist een kleine
+backend; de rest van de app blijft statisch.
+
+**Tussenstap (al in fase 1 gebouwd):** de popup bevat een Street
+View-link op de coördinaten van het punt, zodat stakeholders de plek
+alvast echt kunnen bekijken. Deze functie vervangt dit passieve kijken
+door het concept ín dat straatbeeld te tonen.
+
+### Prompt voor Claude Code
+
+> Breid de viewer uit met locatievisualisatie:
+>
+> 1. **UI** — in de popup van een kaartpunt komt een knop "Visualiseer
+>    op deze locatie". Na klikken: laadstatus, daarna de gegenereerde
+>    afbeelding in de popup, met downloadknop. Nette foutmelding als
+>    genereren mislukt.
+> 2. **Backend** — voeg een klein server-endpoint toe (op de bestaande
+>    Railway-app) dat de beeldgeneratie-API aanroept. De API-key staat
+>    server-side als environment variable, nooit in de frontend.
+> 3. **Beeldinput** — bouw de generatieprompt op uit: de
+>    conceptafbeelding, het concepttype, en context van de locatie
+>    (adres/omgevingstype via reverse geocoding; optioneel een
+>    Mapillary-straatbeeld van de dichtstbijzijnde positie als
+>    referentie, met bronvermelding).
+> 4. **Kostenbeheersing** — cache resultaten per combinatie
+>    locatie+concept (eenmaal gegenereerd wordt hergebruikt) en stel
+>    een rate limit in per bezoeker.
+
+### Acceptatiecriteria
+
+- Klik → beeld binnen acceptabele wachttijd, met zichtbare laadstatus
+- Herhaalde klik op dezelfde locatie+concept is direct (cache)
+- API-key niet zichtbaar in de frontend
+- Werkt voor alle concepten met een datalaag
+
+### Consequentie voor de techniek
+
+De PRD-regel "geen live API-koppelingen in de viewer" vervalt deels in
+fase 2: er komt één backend-endpoint voor beeldgeneratie bij. De
+datalagen blijven statische snapshots.
+
+---
+
+## Functie 2 — Eigen concepten via LLM (lokaal)
 
 **Doel:** de beheerder verzint met een LLM-koppeling een nieuw concept;
 het resultaat (tekst + afbeelding + datalaag) wordt als snapshot aan de
@@ -48,52 +97,3 @@ gehoste webapp.
 - Menselijke bevestigingsstap vóór wegschrijven
 - Geen codewijziging in de viewer nodig; alleen nieuwe bestanden in
   `data/`, `Afbeeldingen/` en een regel in `concepten.json`
-
----
-
-## Functie 2 — Locatievisualisatie (in de gehoste webapp)
-
-**Doel:** een stakeholder klikt een locatie op de kaart aan en ziet een
-gegenereerde 2D-afbeelding van het concept op die specifieke locatie.
-Dit is het overtuigingsmoment: het concept in de eigen straat.
-
-**Draait:** in de gehoste webapp op Railway. Vereist een kleine
-backend; de rest van de app blijft statisch.
-
-**Tussenstap (al in fase 1 gebouwd):** de popup bevat een Street
-View-link op de coördinaten van het punt, zodat stakeholders de plek
-alvast echt kunnen bekijken. Functie 2 vervangt dit passieve kijken
-door het concept ín dat straatbeeld te tonen.
-
-### Prompt voor Claude Code
-
-> Breid de viewer uit met locatievisualisatie:
->
-> 1. **UI** — in de popup van een kaartpunt komt een knop "Visualiseer
->    op deze locatie". Na klikken: laadstatus, daarna de gegenereerde
->    afbeelding in de popup, met downloadknop. Nette foutmelding als
->    genereren mislukt.
-> 2. **Backend** — voeg een klein server-endpoint toe (op de bestaande
->    Railway-app) dat de beeldgeneratie-API aanroept. De API-key staat
->    server-side als environment variable, nooit in de frontend.
-> 3. **Beeldinput** — bouw de generatieprompt op uit: de
->    conceptafbeelding, het concepttype, en context van de locatie
->    (adres/omgevingstype via reverse geocoding; optioneel een
->    Mapillary-straatbeeld van de dichtstbijzijnde positie als
->    referentie, met bronvermelding).
-> 4. **Kostenbeheersing** — cache resultaten per combinatie
->    locatie+concept (eenmaal gegenereerd wordt hergebruikt) en stel
->    een rate limit in per bezoeker.
-
-### Acceptatiecriteria
-
-- Klik → beeld binnen acceptabele wachttijd, met zichtbare laadstatus
-- Herhaalde klik op dezelfde locatie+concept is direct (cache)
-- API-key niet zichtbaar in de frontend
-- Werkt voor alle concepten met een datalaag
-
-### Consequentie voor de techniek
-
-De PRD-regel "geen live API-koppelingen in de viewer" vervalt deels in
-fase 2: er komt één backend-endpoint voor beeldgeneratie bij. De
-datalagen blijven statische snapshots.
