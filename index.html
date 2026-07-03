@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>De out-of-the-box pakketpunten viewer</title>
+  <link rel="icon" type="image/png" href="Afbeeldingen/favicon.png" />
+  <link rel="apple-touch-icon" href="Afbeeldingen/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div class="header-merk">
+      <img class="logo-app" src="Afbeeldingen/logo-app.png" alt="Logo van de out-of-the-box pakketpunten viewer" />
+      <h1>De out-of-the-box pakketpunten viewer</h1>
+    </div>
+    <nav>
+      <button id="tab-bibliotheek" type="button" class="actief">Conceptbibliotheek</button>
+      <button id="tab-kaart" type="button">Kansenkaart</button>
+    </nav>
+    <div class="header-coproductie">
+      <img class="wapen-denhaag" src="Afbeeldingen/denhaag-wapen.png" alt="Wapen van gemeente Den Haag" />
+      <span class="coproductie-label">voor gemeente Den Haag</span>
+    </div>
+  </header>
+
+  <main>
+    <section id="bibliotheek"></section>
+
+    <section id="kaart-sectie" hidden>
+      <div class="kaart-balk">
+        <div id="kaart-status"></div>
+        <button id="reset-kaart" type="button" hidden>Toon alle lagen</button>
+      </div>
+      <p id="kaart-leeg-melding" class="kaart-leeg-melding" hidden></p>
+      <div id="kaart"></div>
+    </section>
+  </main>
+
+  <footer>
+    © OpenStreetMap contributors (ODbL) &middot; data: gemeente Den Haag (Open Data Den Haag, PDOK BAG)
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+  <script type="module">
+    import { initKaart, toonAlleLagen, toonKansenkaartVoorConcept, verversKaartGrootte } from "./kaart.js";
+    import { initBibliotheek } from "./bibliotheek.js";
+
+    const tabBibliotheek = document.getElementById("tab-bibliotheek");
+    const tabKaart = document.getElementById("tab-kaart");
+    const secBibliotheek = document.getElementById("bibliotheek");
+    const secKaart = document.getElementById("kaart-sectie");
+
+    let kaartAlGetoond = false;
+
+    async function wisselNaarKaart(concept) {
+      secBibliotheek.hidden = true;
+      secKaart.hidden = false;
+      tabKaart.classList.add("actief");
+      tabBibliotheek.classList.remove("actief");
+
+      // Belangrijk: pas nadat de sectie zichtbaar is, zodat Leaflet de
+      // echte containergrootte meet (zie verversKaartGrootte in kaart.js).
+      verversKaartGrootte();
+
+      if (concept) {
+        await toonKansenkaartVoorConcept(concept);
+      } else if (!kaartAlGetoond) {
+        await toonAlleLagen();
+      }
+      kaartAlGetoond = true;
+    }
+
+    function wisselNaarBibliotheek() {
+      secKaart.hidden = true;
+      secBibliotheek.hidden = false;
+      tabBibliotheek.classList.add("actief");
+      tabKaart.classList.remove("actief");
+    }
+
+    tabBibliotheek.addEventListener("click", wisselNaarBibliotheek);
+    tabKaart.addEventListener("click", () => wisselNaarKaart());
+
+    async function init() {
+      const resp = await fetch("concepten.json");
+      const concepten = await resp.json();
+
+      initBibliotheek(concepten, (concept) => wisselNaarKaart(concept));
+
+      await initKaart(concepten);
+    }
+
+    init();
+  </script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+[
+  {
+    "naam": "Mobiele groene pakketkluis",
+    "omschrijving": "Verplaatsbare pakketkluis op wielen met groene gevel en dakbeplanting, inzetbaar op parkeerplaatsen, bij evenementen en op boulevards.",
+    "afbeelding": "Afbeeldingen/groene_mobiele_pakketkluis.png",
+    "datalagen": [
+      "data/parkeerplaatsen.geojson",
+      "data/evenementenlocaties.geojson",
+      "data/boulevards.geojson"
+    ]
+  },
+  {
+    "naam": "Ondergrondse pakketkluis",
+    "omschrijving": "Compacte afhaalzuil aan de oppervlakte met ondergrondse opslag en lift, gekoppeld aan bestaande ondergrondse afvalcontainers.",
+    "afbeelding": "Afbeeldingen/ondergrondse_pakketkluis.png",
+    "datalagen": [
+      "data/afvalcontainers.geojson"
+    ]
+  },
+  {
+    "naam": "Ondergrondse pakketgarage",
+    "omschrijving": "Grootschalige pakketopslag geïntegreerd in bestaande ondergrondse parkeergarages.",
+    "afbeelding": "Afbeeldingen/Parkeergarage.png",
+    "datalagen": [
+      "data/parkeergarages.geojson"
+    ]
+  },
+  {
+    "naam": "Verticale pakketkluis",
+    "omschrijving": "Pakketkluis over de volledige gevelhoogte van een gebouw, met intern transportsysteem naar elke verdieping.",
+    "afbeelding": "Afbeeldingen/verticale_pakketkluis.png",
+    "datalagen": [
+      "data/winkelgevels.geojson"
+    ]
+  },
+  {
+    "naam": "Zwevende pakketkluis",
+    "omschrijving": "Hangt onder bruggen en viaducten en neemt zo geen ruimte in op het maaiveld.",
+    "afbeelding": "Afbeeldingen/zwevend_pakketpunt.png",
+    "datalagen": [
+      "data/bruggen.geojson"
+    ]
+  },
+  {
+    "naam": "Spiegelpakketkluis",
+    "omschrijving": "Reflecterende pakketkluis die opgaat in de omgeving en tegelijk als kunstobject fungeert, bijvoorbeeld op Scheveningen, Kijkduin of het Lange Voorhout.",
+    "afbeelding": "Afbeeldingen/spiegel_pakketpunt.png",
+    "datalagen": [
+      "data/boulevards.geojson"
+    ]
+  },
+  {
+    "naam": "Pop-up pakketpunt",
+    "omschrijving": "Tijdelijk, snel op- en afbouwbaar pakketpunt met thematische vormgeving, passend bij evenementen zoals De Parade in het Westbroekpark.",
+    "afbeelding": "Afbeeldingen/popup_pakketpunt.png",
+    "datalagen": [
+      "data/evenementenlocaties.geojson"
+    ]
+  },
+  {
+    "naam": "Seizoensgebonden pakketpunt",
+    "omschrijving": "Mobiel en duurzaam pakketpunt met groene gevel, tijdelijk geplaatst in het seizoen — bijvoorbeeld zomers op de boulevard van Scheveningen of Kijkduin.",
+    "afbeelding": "Afbeeldingen/seizoensgebonden_pakketpunt.png",
+    "datalagen": [
+      "data/boulevards.geojson"
+    ]
+  },
+  {
+    "naam": "Architectonisch pakketpunt",
+    "omschrijving": "Vanaf de tekentafel meeontworpen als onderdeel van gevel en plint bij nieuwbouw en gebiedsontwikkeling — geen toevoeging achteraf.",
+    "afbeelding": "Afbeeldingen/architectonisch_pakketpunt_gebiedsontwikkeling.png",
+    "datalagen": []
+  },
+  {
+    "naam": "Park-pakketpunt",
+    "omschrijving": "Ambachtelijk betegeld pakketpunt dat als sieraad fungeert in de groene ruimte van een park.",
+    "afbeelding": "Afbeeldingen/park_pakketpunt_betegeld.png",
+    "datalagen": []
+  },
+  {
+    "naam": "Trappen-pakketkluis",
+    "omschrijving": "Verwerkt in de trappartij van een plein, met dubbel ruimtegebruik: in de zomer dienen de treden ook als zitplek.",
+    "afbeelding": "Afbeeldingen/trappen_plein_zomer_pakketkluis.png",
+    "datalagen": []
+  }
+]

@@ -1,0 +1,439 @@
+:root {
+  --inkt: #2d2d2d;
+  --inkt-zacht: #52514e;
+  --inkt-gedempt: #898781;
+  --rand: #e1e0d9;
+  --oppervlak: #ffffff;
+  --vlak: #f2f2f2;
+
+  /* Gemeente Den Haag huisstijl: groen is het primaire interactieve
+     merkkleur (bevestigd via de header-navigatiestatussen op
+     denhaag.nl), niet blauw. Blauw/grijs/overige tonen komen uit
+     dezelfde officiële kleurenset maar worden hier niet gebruikt. */
+  --accent: #238541;
+  --accent-hover: #1e6c35;
+  --accent-zacht: #d5e7d5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color: var(--inkt);
+  background: var(--vlak);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--oppervlak);
+  border-bottom: 3px solid var(--accent);
+}
+
+.header-merk {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.logo-app {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  display: block;
+}
+
+header h1 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.header-coproductie {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.wapen-denhaag {
+  height: 32px;
+  width: auto;
+  display: block;
+}
+
+.coproductie-label {
+  font-size: 0.75rem;
+  color: var(--inkt-gedempt);
+  white-space: nowrap;
+}
+
+nav {
+  display: flex;
+  gap: 0.5rem;
+}
+
+nav button {
+  border: 1px solid var(--rand);
+  background: var(--oppervlak);
+  color: var(--inkt);
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+nav button.actief {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+@media (max-width: 720px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  nav {
+    order: 2;
+    width: 100%;
+  }
+  .header-coproductie {
+    order: 3;
+    align-self: flex-end;
+  }
+  .coproductie-label {
+    display: none;
+  }
+}
+
+main {
+  padding: 1.5rem;
+}
+
+.bib-moduswissel {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.modus-knop {
+  border: 1px solid var(--rand);
+  background: var(--oppervlak);
+  color: var(--inkt);
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.modus-knop.actief {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.concept-grid[hidden] {
+  display: none;
+}
+
+.concept-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.concept-kaart {
+  background: var(--oppervlak);
+  border: 1px solid var(--rand);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.concept-kaart img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+}
+
+.concept-kaart-tekst {
+  padding: 1rem 1rem 0;
+}
+
+.concept-titel {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.concept-kaart button {
+  margin: 1rem;
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 8px;
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.concept-kaart button:hover {
+  background: var(--accent-hover);
+}
+
+.concept-presentatie[hidden] {
+  display: none;
+}
+
+.concept-presentatie {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.presentatie-slide {
+  width: 100%;
+}
+
+.presentatie-afbeelding {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 12px;
+  display: block;
+  box-shadow: 0 4px 16px rgba(11, 11, 11, 0.12);
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+
+.presentatie-afbeelding--wisselt {
+  opacity: 0.15;
+}
+
+.presentatie-afbeelding--logo {
+  max-width: 280px;
+  margin: 0 auto;
+  box-shadow: none;
+}
+
+.presentatie-titel {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.presentatie-omschrijving {
+  margin: -0.75rem 0 0;
+  font-size: 0.9rem;
+  color: var(--inkt-zacht);
+  text-align: center;
+  max-width: 560px;
+  line-height: 1.5;
+}
+
+.presentatie-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.presentatie-nav button {
+  border: 1px solid var(--rand);
+  background: var(--oppervlak);
+  border-radius: 999px;
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.presentatie-nav button:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.presentatie-teller {
+  font-size: 0.95rem;
+  color: var(--inkt-zacht);
+  min-width: 3.5rem;
+  text-align: center;
+}
+
+.presentatie-cta {
+  padding: 0.7rem 1.4rem;
+  border: none;
+  border-radius: 8px;
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.presentatie-cta:hover {
+  background: var(--accent-hover);
+}
+
+#kaart-sectie[hidden] {
+  display: none;
+}
+
+#kaart-sectie {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.kaart-balk {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.kaart-balk button {
+  border: 1px solid var(--rand);
+  background: var(--oppervlak);
+  padding: 0.4rem 0.9rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+#kaart {
+  height: 70vh;
+  min-height: 420px;
+  border: 1px solid var(--rand);
+  border-radius: 12px;
+}
+
+.laag-legenda {
+  background: var(--oppervlak);
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  line-height: 1.6;
+  box-shadow: 0 1px 4px rgba(11, 11, 11, 0.15);
+}
+
+.laag-legenda .stip {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 0.4rem;
+}
+
+.cluster-stip div {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 1px 3px rgba(11, 11, 11, 0.35);
+}
+
+.popup-concepten {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  width: 220px;
+}
+
+.popup-afbeelding {
+  width: 100%;
+  border-radius: 6px;
+  display: block;
+}
+
+.popup-titel {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.popup-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.popup-nav button {
+  border: 1px solid var(--rand);
+  background: var(--oppervlak);
+  border-radius: 6px;
+  padding: 0.15rem 0.6rem;
+  cursor: pointer;
+}
+
+.popup-nav button:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.popup-leeg {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--inkt-zacht);
+  text-align: center;
+}
+
+.popup-streetview {
+  margin-top: 0.2rem;
+  font-size: 0.8rem;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.popup-streetview:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
+.kaart-leeg-melding {
+  margin: 0;
+  padding: 0.75rem 1rem;
+  background: var(--accent-zacht);
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  font-size: 0.85rem;
+  color: var(--inkt);
+}
+
+.popup-teller {
+  font-size: 0.8rem;
+  color: var(--inkt-zacht);
+}
+
+footer {
+  padding: 1rem 1.5rem;
+  font-size: 0.8rem;
+  color: var(--inkt-gedempt);
+  border-top: 1px solid var(--rand);
+  background: var(--oppervlak);
+}
